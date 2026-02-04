@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sayva – Crowdsourced Gas Price Tracker</title>
+  <meta name="description" content="Sayva is a mobile app that lets you see real-time gas prices on a map and earn points by submitting photos of prices at the pump.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/logo.png" alt="Sayva" class="logo" width="200" height="48">
+    <p class="tagline">Crowdsourced gas price tracker</p>
+  </header>
+
+  <main>
+    <h1>What is Sayva?</h1>
+    <p>Sayva is a mobile app that shows you <strong>real-time gas prices</strong> on an interactive map. Prices are updated by the community: users submit photos of pump signs, billboards, or receipts, and the app uses AI to read the prices and update the map. You earn <strong>points</strong> for contributing and can spend them to unlock map access or earn more by referring friends.</p>
+
+    <div class="highlight">
+      <p><strong>In short:</strong> See where gas is cheapest near you, and help keep prices up to date by snapping a photo at the pump.</p>
+    </div>
+
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>
+        <strong>Sign up with your phone</strong>
+        <span>Create an account with your phone number (Firebase Auth). You get a small signup bonus in points.</span>
+      </li>
+      <li>
+        <strong>Earn points</strong>
+        <span>Submit photos of gas prices (pump, billboard, or receipt). The app uses AI to extract the station and prices. You earn points for new stations and for confirming existing ones. You can also earn by watching short ads or referring friends.</span>
+      </li>
+      <li>
+        <strong>Unlock the map</strong>
+        <span>Spend points to view gas prices on the map for a set period (e.g. 7 days or 30 days). Stations are color-coded so you can quickly see which are cheapest (green) or pricier (orange/red).</span>
+      </li>
+      <li>
+        <strong>Stay updated</strong>
+        <span>Subscribe to stations you care about and get notifications when prices are updated there.</span>
+      </li>
+    </ol>
+
+    <h2>Features</h2>
+    <div class="features">
+      <div class="card">
+        <h3>🗺️ Interactive map</h3>
+        <p>Color-coded gas station markers by price level. Filter by fuel type and view the latest crowdsourced prices in your area.</p>
+      </div>
+      <div class="card">
+        <h3>📸 Photo submissions</h3>
+        <p>Snap a photo of the pump, a price sign, or a receipt. AI extracts station and prices; you earn points when they’re accepted.</p>
+      </div>
+      <div class="card">
+        <h3>📊 Points & balance</h3>
+        <p>Earn points for submissions, referrals, and optional ads. Spend points to unlock map access for 7 days, 30 days, or longer.</p>
+      </div>
+      <div class="card">
+        <h3>🔔 Notifications</h3>
+        <p>Get notified when prices change at stations you’ve subscribed to, so you never miss a drop.</p>
+      </div>
+      <div class="card">
+        <h3>👥 Referrals</h3>
+        <p>Share your referral code. You and your friends earn bonus points when they sign up and submit prices.</p>
+      </div>
+      <div class="card">
+        <h3>📱 Mobile-first</h3>
+        <p>Built with Flutter for iOS and Android. Phone auth, camera, location, and push notifications are built in.</p>
+      </div>
+    </div>
+
+    <h2>Tech behind Sayva</h2>
+    <p>The <strong>Sayva backend</strong> (NestJS, PostgreSQL with PostGIS) handles auth, gas stations, prices, submissions, and points. It uses Google Places for station data, OpenAI Vision to read prices from photos, and Firebase for auth and remote config. The <strong>Sayva app</strong> (Flutter) talks to this API and shows the map, submission flow, history, profile, and notifications.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sayva – Crowdsourced gas price tracker. Built for the community.</p>
+  </footer>
+</body>
+</html>

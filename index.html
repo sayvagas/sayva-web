@@ -10,13 +10,19 @@
 </head>
 <body>
   <header class="site-header">
-    <img src="assets/logo.png" alt="SAYVA" class="logo" width="200" height="48">
+    <a href="index.html"><img src="assets/logo.png" alt="SAYVA" class="logo" width="200" height="48"></a>
     <p class="tagline">Crowdsourced gas price tracker</p>
+    <nav class="site-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="contact.html">Contact</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
   </header>
 
   <main>
     <h1>What is SAYVA?</h1>
-    <p>SAYVA is a mobile app that shows you <strong>real-time gas prices</strong> on an interactive map. Prices are updated by the community: users submit photos of pump signs, billboards, or receipts, and the app uses AI to read the prices and update the map. You earn <strong>points</strong> for contributing and can spend them to unlock map access or earn more by referring friends.</p>
+    <p>SAYVA is a mobile app that shows you <strong>real-time gas prices</strong> on an interactive map. Prices are updated by the community: users submit photos of pump signs, billboards, or receipts, and the app reads the prices and updates the map automatically. You earn <strong>points</strong> for contributing and can spend them to unlock map access or earn more by referring friends.</p>
 
     <div class="highlight">
       <p><strong>In short:</strong> See where gas is cheapest near you, and help keep prices up to date by snapping a photo at the pump.</p>
@@ -26,11 +32,11 @@
     <ol class="steps">
       <li>
         <strong>Sign up with your phone</strong>
-        <span>Create an account with your phone number (Firebase Auth). You get a small signup bonus in points.</span>
+        <span>Create an account with your phone number. You get a small signup bonus in points.</span>
       </li>
       <li>
         <strong>Earn points</strong>
-        <span>Submit photos of gas prices (pump, billboard, or receipt). The app uses AI to extract the station and prices. You earn points for new stations and for confirming existing ones. You can also earn by watching short ads or referring friends.</span>
+        <span>Submit photos of gas prices (pump, billboard, or receipt). The app automatically reads the station and prices from your photo. You earn points for new stations and for confirming existing ones. You can also earn by watching short ads or referring friends.</span>
       </li>
       <li>
         <strong>Unlock the map</strong>
@@ -50,7 +56,7 @@
       </div>
       <div class="card">
         <h3>📸 Photo submissions</h3>
-        <p>Snap a photo of the pump, a price sign, or a receipt. AI extracts station and prices; you earn points when they’re accepted.</p>
+        <p>Snap a photo of the pump, a price sign, or a receipt. The app reads the prices automatically — you earn points when they're accepted.</p>
       </div>
       <div class="card">
         <h3>📊 Points & balance</h3>
@@ -66,16 +72,15 @@
       </div>
       <div class="card">
         <h3>📱 Mobile-first</h3>
-        <p>Built with Flutter for iOS and Android. Phone auth, camera, location, and push notifications are built in.</p>
+        <p>Available on iOS and Android. Designed for on-the-go use right at the pump.</p>
       </div>
     </div>
 
-    <h2>Tech behind SAYVA</h2>
-    <p>The <strong>SAYVA backend</strong> (NestJS, PostgreSQL with PostGIS) handles auth, gas stations, prices, submissions, and points. It uses Google Places for station data, OpenAI Vision to read prices from photos, and Firebase for auth and remote config. The <strong>SAYVA app</strong> (Flutter) talks to this API and shows the map, submission flow, history, profile, and notifications.</p>
   </main>
 
   <footer class="site-footer">
     <p>SAYVA – Crowdsourced gas price tracker. Built for the community.</p>
+    <p><a href="contact.html">Contact Us</a> · <a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a></p>
   </footer>
 </body>
 </html>

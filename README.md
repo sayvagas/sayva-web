@@ -1,12 +1,12 @@
-# Sayva Web
+# SAYVA Web
 
-Simple static website that explains what the Sayva app does and how it works. Uses the Sayva logo and app theme.
+Simple static website that explains what the SAYVA app does and how it works. Uses the SAYVA logo and app theme.
 
 ## Contents
 
-- **index.html** – Landing page (what Sayva is, how it works, features, tech)
+- **index.html** – Landing page (what SAYVA is, how it works, features, tech)
 - **styles.css** – Theme aligned with the app (primary blue, green, orange)
-- **assets/logo.png** – Sayva app logo
+- **assets/logo.png** – SAYVA app logo
 
 ## GitHub Pages
 

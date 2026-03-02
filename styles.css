@@ -1,20 +1,37 @@
-/* SAYVA – App theme (primary #2196F3, secondary #4CAF50, accent #FF9800) */
+/* SAYVA Design System — March 2026
+   Fonts loaded in HTML <head>: DM Sans (UI) + Outfit (display) via Google Fonts */
+
 :root {
-  --primary: #2196F3;
-  --primary-dark: #1976D2;
-  --secondary: #4CAF50;
-  --accent: #FF9800;
-  --error: #F44336;
-  --bg: #F5F5F5;
-  --surface: #FFFFFF;
-  --card-bg: #FAFAFA;
-  --border: #E0E0E0;
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  /* Logo-inspired header */
-  --header-bg: #1A2A3A;
-  --header-glow: #66CCFF;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  /* Brand */
+  --color-primary:        #6366F1;
+  --color-on-primary:     #FFFFFF;
+  --color-secondary:      #00D68F;
+  --color-accent:         #FF9800;
+
+  /* Backgrounds */
+  --color-bg:             #0D1117;
+  --color-surface:        #161B27;
+  --color-card:           #1E2535;
+  --color-border:         #2A3040;
+
+  /* Text */
+  --color-text-primary:   #EEF2FF;
+  --color-text-secondary: #7E8A9E;
+
+  /* Status */
+  --color-success:        #00D68F;
+  --color-warning:        #FFBB33;
+  --color-error:          #FF5C5C;
+
+  /* Border radius */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-pill: 12px;
+
+  /* Typography */
+  --font-ui:      'DM Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
 }
 
 * {
@@ -23,19 +40,19 @@
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background: var(--bg);
-  line-height: 1.6;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  line-height: 1.5;
 }
 
-/* Header */
+/* ─── App Bar / Header ─── */
 .site-header {
-  background: linear-gradient(180deg, var(--header-bg) 0%, #253545 100%);
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
   padding: 1.5rem 1rem;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .site-header .logo {
@@ -45,17 +62,18 @@ body {
   width: auto;
   max-width: 200px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .site-header .tagline {
   margin: 0 0 0.75rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.02em;
 }
 
-/* Navigation */
+/* ─── Navigation ─── */
 .site-nav {
   display: flex;
   justify-content: center;
@@ -63,73 +81,110 @@ body {
 }
 
 .site-nav a {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.70);
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   padding: 0.25rem 0;
   border-bottom: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 .site-nav a:hover {
-  color: white;
+  color: #FFFFFF;
 }
 
 .site-nav a.active {
-  color: white;
-  border-bottom-color: var(--accent);
+  color: #FFFFFF;
+  border-bottom-color: rgba(255, 255, 255, 0.70);
 }
 
-/* Main */
+/* ─── Main content ─── */
 main {
   max-width: 720px;
   margin: 0 auto;
   padding: 2rem 1rem 3rem;
 }
 
+@media (min-width: 768px) {
+  main {
+    padding: 2rem 1.5rem 3rem;
+  }
+}
+
+/* ─── Typography ─── */
 h1 {
-  font-size: 1.75rem;
-  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
   margin: 0 0 1rem;
+  line-height: 1.15;
 }
 
 h2 {
-  font-size: 1.35rem;
-  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
   margin: 2rem 0 1rem;
   padding-bottom: 0.35rem;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem;
 }
 
 p {
   margin: 0 0 1rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
-/* Cards */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Cards ─── */
 .card {
-  background: var(--surface);
-  border-radius: 12px;
-  padding: 1.25rem;
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  padding: 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.card:hover {
+  border-color: rgba(99, 102, 241, 0.45);
 }
 
 .card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
   margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-  color: var(--primary);
 }
 
 .card p {
   margin: 0;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
 }
 
-/* Feature grid */
+/* ─── Feature grid ─── */
 .features {
   display: grid;
   gap: 1rem;
@@ -142,7 +197,7 @@ p {
   }
 }
 
-/* How it works steps */
+/* ─── How it works steps ─── */
 .steps {
   list-style: none;
   padding: 0;
@@ -164,39 +219,41 @@ p {
   top: 0;
   width: 1.75rem;
   height: 1.75rem;
-  background: var(--primary);
-  color: white;
+  background: var(--color-primary);
+  color: #FFFFFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .steps li strong {
   display: block;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
+  font-weight: 600;
   margin-bottom: 0.25rem;
 }
 
 .steps li span {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
-/* Footer */
+/* ─── Footer ─── */
 .site-footer {
   text-align: center;
   padding: 2rem 1rem;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  border-top: 1px solid var(--border);
-  background: var(--card-bg);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
 }
 
 .site-footer a {
-  color: var(--primary);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -204,12 +261,13 @@ p {
   text-decoration: underline;
 }
 
-/* Accent highlight */
+/* ─── Highlight / info block ─── */
 .highlight {
-  background: linear-gradient(120deg, rgba(33, 150, 243, 0.12) 0%, rgba(76, 175, 80, 0.08) 100%);
-  border-left: 4px solid var(--primary);
+  background: rgba(99, 102, 241, 0.10);
+  border: 1px solid rgba(99, 102, 241, 0.30);
+  border-left: 4px solid var(--color-primary);
   padding: 1rem 1.25rem;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   margin: 1rem 0;
 }
 
@@ -218,7 +276,7 @@ p {
 }
 
 .highlight a {
-  color: var(--primary-dark);
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
 }
@@ -227,20 +285,23 @@ p {
   text-decoration: underline;
 }
 
-/* Legal pages */
+/* ─── Legal pages ─── */
 .legal h2 {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   margin: 2rem 0 0.75rem;
 }
 
 .legal h3 {
-  font-size: 1rem;
-  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin: 1.25rem 0 0.5rem;
 }
 
 .legal a {
-  color: var(--primary);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -251,7 +312,7 @@ p {
 .legal ul {
   margin: 0 0 1rem;
   padding-left: 1.5rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .legal ul li {
@@ -260,8 +321,8 @@ p {
 }
 
 .legal .last-updated {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
   font-style: italic;
   margin-bottom: 1.5rem;
 }

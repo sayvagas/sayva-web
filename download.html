@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download SAYVA</title>
+  <meta name="description" content="Download SAYVA — snap gas prices at stations near you, earn points, and help your community find the best deals.">
+
+  <!-- Open Graph — optimised for peer-to-peer sharing via referral links -->
+  <meta property="og:title" content="Join me on SAYVA">
+  <meta property="og:description" content="Download the app and use my referral code to earn bonus points.">
+  <meta property="og:image" content="https://sayvagas.com/assets/app_icon.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sayvagas.com/download">
+
+  <!-- Twitter / iMessage card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Join me on SAYVA">
+  <meta name="twitter:description" content="Download the app and use my referral code to earn bonus points.">
+  <meta name="twitter:image" content="https://sayvagas.com/assets/app_icon.png">
+
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html"><img src="assets/logo.png" alt="SAYVA" class="logo" width="200" height="48"></a>
+    <p class="tagline">Crowdsourced gas price tracker</p>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </header>
+
+  <main class="dl-main">
+
+    <!--
+      Referral card — hidden by default.
+      JS shows it and populates the code when a valid ?ref= param is present.
+      Download links and code text are rendered server-side-safe; only the
+      copy button and visibility toggle depend on JS.
+    -->
+    <section class="dl-referral" id="dl-referral" hidden aria-live="polite">
+      <p class="dl-referral__eyebrow">You were invited to SAYVA</p>
+      <p class="dl-referral__label">Your referral code</p>
+      <div class="dl-referral__code-row">
+        <span class="dl-referral__code" id="dl-code" aria-label="Referral code"></span>
+        <button class="dl-copy-btn" id="dl-copy-btn" type="button" aria-label="Copy referral code">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="dl-copy-label">Copy</span>
+        </button>
+      </div>
+      <p class="dl-referral__instruction">
+        Download the app, go to <strong>Profile → Referrals</strong>, and enter this code to earn bonus points.
+      </p>
+    </section>
+
+    <!-- App hero -->
+    <div class="dl-hero">
+      <img src="assets/app_icon.png" alt="SAYVA app icon" class="dl-app-icon" width="96" height="96">
+      <h1 class="dl-title">SAYVA</h1>
+      <p class="dl-subtitle">Snap. Earn. Repeat.</p>
+    </div>
+
+    <!-- Store download buttons -->
+    <div class="dl-stores">
+      <!-- iOS: links to App Store search until app is live -->
+      <a
+        href="https://apps.apple.com/search?term=SAYVA"
+        class="dl-store-btn dl-store-btn--ios"
+        id="dl-btn-ios"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="dl-store-btn__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <span class="dl-store-btn__text">
+          <span class="dl-store-btn__sub">Download on the</span>
+          <span class="dl-store-btn__main">App Store</span>
+        </span>
+      </a>
+
+      <!-- Android: coming soon — not a link, role=img so it isn't tab-focusable as a button -->
+      <div
+        class="dl-store-btn dl-store-btn--android dl-store-btn--soon"
+        id="dl-btn-android"
+        role="img"
+        aria-label="Google Play — coming soon"
+      >
+        <svg class="dl-store-btn__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M4.07 3.28 13.64 12 4.07 20.72A1.5 1.5 0 0 1 2 19.5v-15a1.5 1.5 0 0 1 2.07-1.22zM16.5 8.5l2.76 1.57a1.5 1.5 0 0 1 0 2.62L16.5 14.3 13.6 12l2.9-3.5zM5.08 21.45 13.05 13l2.2 2.63-10.17 5.82zM5.08 2.55l10.17 5.82L13.05 11 5.08 2.55z"/>
+        </svg>
+        <span class="dl-store-btn__text">
+          <span class="dl-store-btn__sub">Coming soon on</span>
+          <span class="dl-store-btn__main">Google Play</span>
+        </span>
+        <span class="dl-soon-badge" aria-hidden="true">Soon</span>
+      </div>
+    </div>
+
+    <!-- Value proposition -->
+    <ul class="dl-value-list">
+      <li>
+        <span class="dl-value-list__icon" aria-hidden="true">📸</span>
+        <span>Snap gas prices at stations near you</span>
+      </li>
+      <li>
+        <span class="dl-value-list__icon" aria-hidden="true">⭐</span>
+        <span>Earn points redeemable for rewards</span>
+      </li>
+      <li>
+        <span class="dl-value-list__icon" aria-hidden="true">🗺️</span>
+        <span>Help your community find the best prices</span>
+      </li>
+    </ul>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>SAYVA – Crowdsourced gas price tracker. Built for the community.</p>
+    <p><a href="contact.html">Contact Us</a> · <a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ── Referral code ────────────────────────────────────────────────────
+      // Read ?ref= param, validate, and surface the referral card.
+      // Only alphanumeric chars; 4–10 length; displayed uppercase.
+      var params = new URLSearchParams(window.location.search);
+      var raw = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+      if (raw.length >= 4 && raw.length <= 10) {
+        var section = document.getElementById('dl-referral');
+        var codeEl  = document.getElementById('dl-code');
+
+        codeEl.textContent = raw;
+        section.hidden = false;
+
+        // Update page title for the invited-user context
+        document.title = "You\u2019re invited to join SAYVA";
+
+        // Copy button — clipboard API with execCommand fallback
+        var copyBtn   = document.getElementById('dl-copy-btn');
+        var copyLabel = document.getElementById('dl-copy-label');
+
+        copyBtn.addEventListener('click', function () {
+          var finish = function () {
+            copyLabel.textContent = 'Copied!';
+            copyBtn.classList.add('dl-copy-btn--success');
+            setTimeout(function () {
+              copyLabel.textContent = 'Copy';
+              copyBtn.classList.remove('dl-copy-btn--success');
+            }, 2000);
+          };
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(raw).then(finish).catch(function () {
+              execCopy(raw);
+              finish();
+            });
+          } else {
+            execCopy(raw);
+            finish();
+          }
+        });
+      }
+
+      function execCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+
+      // ── Device detection ─────────────────────────────────────────────────
+      // Highlight the relevant store button; dim the other.
+      // No-op on desktop or unknown — both buttons shown equally.
+      var ua        = navigator.userAgent;
+      var isIOS     = /iPhone|iPad|iPod/i.test(ua);
+      var isAndroid = /Android/i.test(ua);
+
+      if (isIOS) {
+        document.getElementById('dl-btn-ios').classList.add('dl-store-btn--featured');
+        document.getElementById('dl-btn-android').classList.add('dl-store-btn--dimmed');
+      } else if (isAndroid) {
+        document.getElementById('dl-btn-android').classList.add('dl-store-btn--featured');
+        document.getElementById('dl-btn-ios').classList.add('dl-store-btn--dimmed');
+      }
+    }());
+  </script>
+</body>
+</html>

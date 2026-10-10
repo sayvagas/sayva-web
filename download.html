@@ -50,7 +50,7 @@
     -->
     <section class="dl-referral" id="dl-referral" hidden aria-live="polite">
       <p class="dl-referral__eyebrow">You were invited to SAYVA</p>
-      <p class="dl-referral__label">Your referral code</p>
+      <p class="dl-referral__label">Your invite code</p>
       <div class="dl-referral__code-row">
         <span class="dl-referral__code" id="dl-code" aria-label="Referral code"></span>
         <button class="dl-copy-btn" id="dl-copy-btn" type="button" aria-label="Copy referral code">
@@ -62,14 +62,19 @@
         </button>
       </div>
       <p class="dl-referral__instruction">
-        When SAYVA is available, download the app and use this code to connect your invite.
+        Download SAYVA from the button below and this code fills itself in when you set up your profile.
+        If it doesn't, enter it under <strong>Have a code?</strong>
       </p>
     </section>
 
     <!-- Store download buttons -->
     <div class="dl-stores">
-      <!-- iOS: coming soon until the App Store listing is live -->
-      <div
+      <!--
+        Store buttons are anchors without an href (inert) until STORE_CONFIG
+        in the script below names a live listing; the script then turns them
+        into links and drops the "coming soon" state.
+      -->
+      <a
         class="dl-store-btn dl-store-btn--ios dl-store-btn--soon"
         id="dl-btn-ios"
         role="img"
@@ -83,10 +88,9 @@
           <span class="dl-store-btn__main">App Store</span>
         </span>
         <span class="dl-soon-badge" aria-hidden="true">Soon</span>
-      </div>
+      </a>
 
-      <!-- Android: coming soon — not a link, role=img so it isn't tab-focusable as a button -->
-      <div
+      <a
         class="dl-store-btn dl-store-btn--android dl-store-btn--soon"
         id="dl-btn-android"
         role="img"
@@ -100,7 +104,7 @@
           <span class="dl-store-btn__main">Google Play</span>
         </span>
         <span class="dl-soon-badge" aria-hidden="true">Soon</span>
-      </div>
+      </a>
     </div>
 
     <!-- Value proposition -->
@@ -130,17 +134,30 @@
     (function () {
       'use strict';
 
-      // ── Referral code ────────────────────────────────────────────────────
-      // Read ?ref= param, validate, and surface the referral card.
-      // Only alphanumeric chars; 4–10 length; displayed uppercase.
+      // ── Store config ─────────────────────────────────────────────────────
+      // Fill these in when the listings go live. A store whose link can't be
+      // built stays in its "coming soon" state.
+      var STORE_CONFIG = {
+        APP_STORE_ID: null,          // e.g. '6470000000' (App Store Connect → App Information → Apple ID)
+        APPLE_PROVIDER_TOKEN: null,  // App Store Connect → Analytics → campaign link "pt" value
+        TESTFLIGHT_URL: null,        // e.g. 'https://testflight.apple.com/join/XXXXXXXX'; used when no App Store ID
+        PLAY_PACKAGE: 'com.saysay.sayva',
+        PLAY_LIVE: false             // true once the Play listing (or open testing) is public
+      };
+
+      // ── Invite / download code ───────────────────────────────────────────
+      // ?ref= carries a friend's referral code or a channel "download code"
+      // (e.g. DRIVER). The app decides which; here it is just passed along.
+      // Alphanumeric, 3–20 chars, displayed uppercase (matches the backend).
       var params = new URLSearchParams(window.location.search);
       var raw = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      var code = raw.length >= 3 && raw.length <= 20 ? raw : null;
 
-      if (raw.length >= 4 && raw.length <= 10) {
+      if (code) {
         var section = document.getElementById('dl-referral');
         var codeEl  = document.getElementById('dl-code');
 
-        codeEl.textContent = raw;
+        codeEl.textContent = code;
         section.hidden = false;
 
         // Update page title for the invited-user context
@@ -161,12 +178,12 @@
           };
 
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(raw).then(finish).catch(function () {
-              execCopy(raw);
+            navigator.clipboard.writeText(code).then(finish).catch(function () {
+              execCopy(code);
               finish();
             });
           } else {
-            execCopy(raw);
+            execCopy(code);
             finish();
           }
         });
@@ -183,6 +200,59 @@
         document.body.removeChild(ta);
       }
 
+      // ── Store links ──────────────────────────────────────────────────────
+      // Android: the code rides the Play install referrer, which the app
+      // reads on first launch. iOS has no equivalent, so the tap also copies
+      // an invite link; the app looks for it on the clipboard during setup.
+      // `ct` lets App Store Connect count installs per code.
+      function iosUrl() {
+        if (STORE_CONFIG.APP_STORE_ID) {
+          var url = 'https://apps.apple.com/app/id' + STORE_CONFIG.APP_STORE_ID;
+          var q = [];
+          if (STORE_CONFIG.APPLE_PROVIDER_TOKEN) q.push('pt=' + encodeURIComponent(STORE_CONFIG.APPLE_PROVIDER_TOKEN));
+          if (code) q.push('ct=' + encodeURIComponent(code));
+          return q.length ? url + '?' + q.join('&') : url;
+        }
+        return STORE_CONFIG.TESTFLIGHT_URL;
+      }
+
+      function androidUrl() {
+        if (!STORE_CONFIG.PLAY_LIVE) return null;
+        var url = 'https://play.google.com/store/apps/details?id=' + STORE_CONFIG.PLAY_PACKAGE;
+        if (!code) return url;
+        var referrer = 'ref=' + code + '&utm_source=' + code + '&utm_medium=referral';
+        return url + '&referrer=' + encodeURIComponent(referrer);
+      }
+
+      function activate(btn, href, sub, label) {
+        if (!href) return;
+        btn.href = href;
+        btn.removeAttribute('role');
+        btn.setAttribute('aria-label', label);
+        btn.classList.remove('dl-store-btn--soon');
+        var badge = btn.querySelector('.dl-soon-badge');
+        if (badge) badge.remove();
+        btn.querySelector('.dl-store-btn__sub').textContent = sub;
+      }
+
+      var iosBtn = document.getElementById('dl-btn-ios');
+      var androidBtn = document.getElementById('dl-btn-android');
+      activate(iosBtn, iosUrl(), 'Download on the', 'Download on the App Store');
+      activate(androidBtn, androidUrl(), 'Get it on', 'Get it on Google Play');
+
+      if (code && iosBtn.href) {
+        // Must run inside the tap (user gesture) or Safari refuses the write.
+        // The navigation proceeds whether or not the copy succeeds.
+        iosBtn.addEventListener('click', function () {
+          var link = 'https://sayvagas.com/download?ref=' + code;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).catch(function () { execCopy(link); });
+          } else {
+            execCopy(link);
+          }
+        });
+      }
+
       // ── Device detection ─────────────────────────────────────────────────
       // Highlight the relevant store button; dim the other.
       // No-op on desktop or unknown — both buttons shown equally.
@@ -191,11 +261,11 @@
       var isAndroid = /Android/i.test(ua);
 
       if (isIOS) {
-        document.getElementById('dl-btn-ios').classList.add('dl-store-btn--featured');
-        document.getElementById('dl-btn-android').classList.add('dl-store-btn--dimmed');
+        iosBtn.classList.add('dl-store-btn--featured');
+        androidBtn.classList.add('dl-store-btn--dimmed');
       } else if (isAndroid) {
-        document.getElementById('dl-btn-android').classList.add('dl-store-btn--featured');
-        document.getElementById('dl-btn-ios').classList.add('dl-store-btn--dimmed');
+        androidBtn.classList.add('dl-store-btn--featured');
+        iosBtn.classList.add('dl-store-btn--dimmed');
       }
     }());
   </script>

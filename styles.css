@@ -420,7 +420,7 @@ a:hover {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
-a.dl-store-btn:hover:not(.dl-store-btn--dimmed) {
+a.dl-store-btn[href]:hover:not(.dl-store-btn--dimmed) {
   border-color: rgba(255, 255, 255, 0.25);
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
   text-decoration: none;
